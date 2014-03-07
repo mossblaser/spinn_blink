@@ -7,7 +7,7 @@ import copy
 import struct
 import time
 
-import scp
+import spinn_blink.scp as scp
 
 class SpiNNakerBoard(object):
 	"""
@@ -126,24 +126,19 @@ class SpiNN5Board(SpiNNakerBoard):
 
 
 
-b = SpiNN5Board("192.168.3.185")
-import random
-import time
-import math
-from PIL import Image
-msg = Image.open("message.png")
-while True:
-	#for x in range(7):
-	#	for y in range(7):
-	#		#b.display_buffer = [[ (math.sin(math.pi*(((x*90)+i)/180.0))+1.0)/2.0 for x in range(7) ] for y in range(7)]
-	#		b.display_buffer = [[ int(x==x_ and y==y_) for x_ in range(7) ] for y_ in range(7)]
-	#		b.update_display()
-	#		time.sleep(0.10)
-	#for i in range(0,360,5):
-	#	b.display_buffer = [[ (math.sin(math.sqrt(x**2 + y**2)+(math.pi*i/180))+1.0)/2.0 for x in range(7) ] for y in range(7)]
-	#	b.update_display()
-	#	time.sleep(0.01)
-	for i in range(msg.size[0]-7):
-		b.display_buffer = [[ msg.getpixel((x+i, 6-y))[0] for x in range(7) ][::-1] for y in range(7)]
-		b.update_display()
-		time.sleep(0.10)
+if __name__=="__main__":
+	"""
+	Example: As a command-line app, takes a hostname for a spinn5 board and an
+	image file to scroll.
+	"""
+	import sys
+	import time
+	from PIL import Image
+	
+	b = SpiNN5Board(sys.argv[1])
+	msg = Image.open(sys.argv[2])
+	while True:
+		for i in range(msg.size[0]-7):
+			b.display_buffer = [[ msg.getpixel((x+i, 6-y))[0] for x in range(7) ][::-1] for y in range(7)]
+			b.update_display()
+			time.sleep(0.10)

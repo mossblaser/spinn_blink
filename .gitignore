@@ -1,0 +1,8 @@
+.*
+*.swp
+*~
+*.pyc
+*.o
+*.aplx
+*.txt
+*.elf
