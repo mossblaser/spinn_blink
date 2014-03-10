@@ -7,7 +7,7 @@ import copy
 import struct
 import time
 
-import spinn_blink.scp as scp
+import pacman103.scp as scp
 
 class SpiNNakerBoard(object):
 	"""
@@ -126,19 +126,4 @@ class SpiNN5Board(SpiNNakerBoard):
 
 
 
-if __name__=="__main__":
-	"""
-	Example: As a command-line app, takes a hostname for a spinn5 board and an
-	image file to scroll.
-	"""
-	import sys
-	import time
-	from PIL import Image
-	
-	b = SpiNN5Board(sys.argv[1])
-	msg = Image.open(sys.argv[2])
-	while True:
-		for i in range(msg.size[0]-7):
-			b.display_buffer = [[ msg.getpixel((x+i, 6-y))[0] for x in range(7) ][::-1] for y in range(7)]
-			b.update_display()
-			time.sleep(0.10)
+

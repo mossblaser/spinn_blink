@@ -7,5 +7,5 @@ setup(name='spinn_blink',
       description='SpiNNaker-as-an-LED-matrix driver',
       author='Jonathan Heathcote',
       author_email='mail@jhnet.co.uk',
-      packages=[ 'spinn_blink' ],
+      py_modules=[ 'spinn_blink' ],
      )
